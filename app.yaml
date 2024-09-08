@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: fine-pod
+  labels:
+    app: fine-pod
+spec:
+  securityContext:
+    seccompProfile:
+      type: RuntimeDefault
+#      type: Localhost
+#      localhostProfile: profiles/seccomp-profile.json
+  volumes:
+    - name: tmp
+      emptyDir: {}
+  hostPID: false
+  hostNetwork: false
+  hostIPC: false
+  containers:
+    - name: python-app
+      image: ubi-py:v1
+      volumeMounts:
+        - name: tmp
+          mountPath: /tmp
+      ports:
+        - name: main-port
+          containerPort: 8080
+      securityContext:
+        capabilities:
+          drop:
+            - ALL
+        runAsUser: 1001
+        runAsGroup: 1001
+        runAsNonRoot: true
+        allowPrivilegeEscalation: false
+        readOnlyRootFilesystem: true
+        privileged: false
+
+
