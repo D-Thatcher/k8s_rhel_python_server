@@ -1,4 +1,4 @@
-# K8s sample deployment configuration
+# K8s sample RHEL Python web app deployment configuration
 
 ## Overview
 A sample K8s Python server deployment configuration that prioritizes security and extensibility. The Python app is built in a hardened RHEL UBI v9 image and the Pod configuration follows K8s security best practices.
